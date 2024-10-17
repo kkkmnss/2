@@ -1,32 +1,45 @@
 #!/bin/bash
 
+# 使用 bash 运行此脚本
+if [ -z "$BASH_VERSION" ]
+then
+    echo "请使用 bash 运行此脚本" >&2
+    exit 1
+fi
+
 # 更新软件包列表
 pkg update -y
 
-# 安装Python、Git、Clang和其它必需的依赖
-pkg install python clang openssl toolchain-rust git -y
+# 安装必要的软件
+pkg install python clang openssl git -y
 
-# 安装Python SSL依赖
+# 安装 OpenSSL 工具
 pkg install openssl-tool -y
 
-# 配置环境变量
-export PATH="$PREFIX/bin:$PATH"
-export LD_LIBRARY_PATH="$PREFIX/lib:$LD_LIBRARY_PATH"
+# 检查 Python 是否安装成功
+which python3 >/dev/null 2>&1
+if [ $? -ne 0 ]; then
+    echo "Python 未正确安装。" >&2
+    exit 1
+fi
 
-# 创建并激活Python虚拟环境
+# 创建并激活虚拟环境
 python3 -m venv venv
 source venv/bin/activate
 
-# 更新pip并尝试安装需要的Python包
+# 检查虚拟环境是否激活
+if [ "$VIRTUAL_ENV" == "" ]; then
+    echo "虚拟环境未激活。" >&2
+    exit 1
+fi
+
+# 更新pip并安装依赖
 pip install --upgrade pip
 pip install requests urllib3 charset_normalizer maturin
 
-# 克隆GitHub项目
+# 克隆GitHub项目并安装项目依赖
 git clone https://github.com/kkkmnss/1.git
 cd 1
-
-# 安装项目依赖
 pip install -r requirements.txt
 
-# 输出环境设置完成的信息，保持虚拟环境开启
 echo "环境设置完成，现在你可以开始你的项目工作了。"
