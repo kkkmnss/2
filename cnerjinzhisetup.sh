@@ -39,9 +39,12 @@ echo "正在配置清华大学 PyPI 镜像源..."
 pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 
 # 更新 pip 并安装依赖
-echo "正在更新 pip 并安装依赖包（通过清华镜像源）..."
+echo "正在更新 pip..."
 pip install --upgrade pip
-pip install --only-binary :all: requests urllib3 charset_normalizer maturin
+
+# 从官方 PyPI 镜像安装 cloud scraper
+echo "正在安装依赖（通过官方 PyPI 镜像）..."
+pip install --index-url https://pypi.org/simple cloudscraper requests urllib3 charset_normalizer maturin
 
 # 安装 PyRoxy 和 impacket 模块
 echo "正在安装 PyRoxy 和 Impacket 模块..."
@@ -55,9 +58,12 @@ cd 1
 
 # 安装项目依赖
 echo "正在安装项目依赖..."
-pip install --only-binary :all: -r requirements.txt
+pip install -r requirements.txt
 
-# 保持虚拟环境激活
+# 手动激活虚拟环境
+echo "激活虚拟环境..."
+source ../venv/bin/activate
+
 echo "环境设置完成，现在你可以开始你的项目工作了。"
 
 # 添加攻击测试用例
