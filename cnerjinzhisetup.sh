@@ -43,13 +43,18 @@ echo "正在更新 pip 并安装依赖包（通过清华镜像源）..."
 pip install --upgrade pip
 pip install --only-binary :all: requests urllib3 charset_normalizer maturin
 
+# 安装 PyRoxy 和 impacket 模块
+echo "正在安装 PyRoxy 和 Impacket 模块..."
+pip install git+https://github.com/MatrixTM/PyRoxy.git
+pip install git+https://github.com/SecureAuthCorp/impacket.git
+
 # 克隆 GitHub 项目并安装项目依赖
 echo "正在克隆 GitHub 项目..."
 git clone https://github.com/kkkmnss/1.git
 cd 1
 
 # 安装项目依赖
-echo "正在安装项目依赖（通过清华镜像源）..."
+echo "正在安装项目依赖..."
 pip install --only-binary :all: -r requirements.txt
 
 # 保持虚拟环境激活
