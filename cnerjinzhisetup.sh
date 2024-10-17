@@ -10,8 +10,8 @@ fi
 echo "正在更新软件包列表..."
 pkg update -y
 
-# 安装必要的软件和 Rust 编译器
-echo "正在安装 Python、Clang、OpenSSL、Git 和 Rust..."
+# 安装必要的软件
+echo "正在安装 Python 和其他工具..."
 pkg install python clang openssl git rust -y
 
 # 安装 OpenSSL 工具
@@ -38,16 +38,17 @@ fi
 echo "正在配置清华大学 PyPI 镜像源..."
 pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 
-# 更新 pip 并安装依赖
+# 更新 pip
 echo "正在更新 pip..."
 pip install --upgrade pip
 
-# 从官方 PyPI 镜像安装 cloud scraper
-echo "正在安装依赖（通过官方 PyPI 镜像）..."
-pip install --index-url https://pypi.org/simple cloudscraper requests urllib3 charset_normalizer maturin
+# 下载并安装已编译的二进制包
+echo "正在下载并安装预编译的二进制包..."
 
-# 安装 PyRoxy 和 impacket 模块
-echo "正在安装 PyRoxy 和 Impacket 模块..."
+# 下载并安装已编译的 cloudscraper, requests, urllib3, charset_normalizer 等依赖
+pip install --no-cache-dir requests==2.27.1 urllib3==1.26.5 charset_normalizer==2.0.12 cloudscraper==1.2.71
+
+# 下载并安装已编译的 PyRoxy 和 impacket
 pip install git+https://github.com/MatrixTM/PyRoxy.git
 pip install git+https://github.com/SecureAuthCorp/impacket.git
 
