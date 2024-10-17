@@ -1,7 +1,13 @@
 #!/bin/bash
 
-# 更新软件包并安装 Rust 编译器
-pkg update -y && pkg install rust -y
+# 更新软件包列表
+pkg update -y
+
+# 安装必需的软件包
+pkg install python git rust clang -y
+
+# 配置环境变量（根据实际情况调整）
+export PATH=$PATH:$PREFIX/bin
 
 # 更新pip并尝试安装需要的Python包
 python3 -m pip install --upgrade pip
