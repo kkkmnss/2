@@ -17,7 +17,7 @@ pip install numpy requests
 
 # 克隆你的GitHub项目
 git clone https://github.com/kkkmnss/1.git
-cd 2
+cd 1
 
 # 根据你的项目需要执行的命令
 # 如果有具体的构建或安装步骤，可以在这里指定，例如：
