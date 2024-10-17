@@ -1,21 +1,21 @@
-#!/bin/sh
+#!/bin/bash
 
-# 自动处理pkg的更新与安装
-yes | pkg update
-pkg install python python-pip git -y
+# 更新软件包并安装 Rust 编译器
+pkg update -y && pkg install rust -y
 
-# 创建虚拟环境并激活
-python -m venv venv
-. venv/bin/activate
+# 更新pip并尝试安装需要的Python包
+python3 -m pip install --upgrade pip
+python3 -m pip install --upgrade requests urllib3 charset_normalizer
+
+# 尝试安装maturin
+python3 -m pip install maturin
 
 # 克隆GitHub项目
 git clone https://github.com/kkkmnss/1.git
 cd 1
 
 # 安装项目依赖
-pip install -r requirements.txt
+python3 -m pip install -r requirements.txt
 
-# 更新常用的包
-pip install --upgrade requests urllib3 charset_normalizer
-
-# 结束时不输出额外信息，留在虚拟环境中
+# 保持虚拟环境开启，不退出
+echo "环境设置完成，现在你可以开始你的项目工作了。"
