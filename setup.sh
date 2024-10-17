@@ -10,20 +10,19 @@ fi
 echo "正在更新软件包列表..."
 pkg update -y
 
-# 安装必需的软件包
-echo "正在安装 Python、Clang、OpenSSL 和 Git..."
-pkg install python clang openssl git -y
-
-# 安装 OpenSSL 工具
-echo "正在安装 OpenSSL 工具..."
-pkg install openssl-tool -y
+# 安装 Python，并确保它被正确安装
+echo "正在安装 Python..."
+pkg install python -y
 
 # 检查 Python 是否正确安装
-which python3 >/dev/null 2>&1
-if [ $? -ne 0 ]; then
+if ! command -v python3 >/dev/null 2>&1; then
     echo "Python 未正确安装。" >&2
     exit 1
 fi
+
+# 安装其他必需的软件包
+echo "正在安装 Clang、OpenSSL 和 Git..."
+pkg install clang openssl git openssl-tool -y
 
 # 创建并激活 Python 虚拟环境
 echo "正在创建并激活 Python 虚拟环境..."
