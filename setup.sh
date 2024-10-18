@@ -6,13 +6,24 @@ if [ -z "$BASH_VERSION" ]; then
     exit 1
 fi
 
+# 设置非交互模式
+export DEBIAN_FRONTEND=noninteractive
+
 # 更新软件包列表
 echo "正在更新软件包列表..."
-DEBIAN_FRONTEND=noninteractive pkg update -y
+pkg update -y
 
 # 安装必要的软件和 Rust 编译器
-echo "正在安装 Python、Clang、OpenSSL、Git、Rust 和 OpenSSL 开发库..."
-DEBIAN_FRONTEND=noninteractive pkg install python clang openssl git rust openssl-tool -y --assume-yes
+echo "正在安装 Python、Clang、OpenSSL、Git 和 Rust..."
+pkg install python clang openssl git rust openssl-tool -y
+
+# 安装 binutils
+echo "正在安装 binutils..."
+pkg install binutils -y
+
+# 检查 ar 工具是否安装
+echo "检查 ar 工具是否已安装..."
+which aarch64-linux-android-ar || echo "ar 工具未安装，请检查您的安装步骤！"
 
 # 克隆包含 .whl 文件的 GitHub 仓库
 echo "正在从 GitHub 克隆 wh 仓库..."
@@ -24,6 +35,9 @@ echo "正在安装 .whl 文件..."
 for wheel in *.whl; do
     pip install "$wheel"
 done
+
+# 返回到上级目录
+cd ..
 
 # 克隆 MHDDOS 项目
 echo "正在从 GitHub 克隆 MHDDOS 项目..."
