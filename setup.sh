@@ -14,22 +14,20 @@ pkg update -y
 echo "正在安装 Python、Clang、OpenSSL、Git 和 Rust..."
 pkg install python clang openssl git rust -y
 
-# 安装 OpenSSL 工具
-pkg install openssl-tool -y
-
-# 检查 Python 是否安装成功
-if ! command -v python3 >/dev/null 2>&1; then
-    echo "Python 未正确安装。" >&2
-    exit 1
-fi
-
-# 克隆 GitHub 项目
-echo "正在克隆 GitHub 项目..."
+# 克隆包含 .whl 文件的 GitHub 仓库
+echo "正在从 GitHub 克隆 wh 仓库..."
 git clone https://github.com/kkkmnss/wh.git
 cd wh
 
-# 从您的二进制文件列表安装依赖
-echo "正在安装二进制依赖文件..."
-pip install *.whl
+# 安装所有 .whl 文件
+echo "正在安装 .whl 文件..."
+for wheel in *.whl; do
+    pip install "$wheel"
+done
+
+# 克隆 MHDDOS 项目
+echo "正在从 GitHub 克隆 MHDDOS 项目..."
+git clone https://github.com/kkkmnss/1.git
+cd 1
 
 echo "环境设置完成，现在你可以开始你的项目工作了。"
