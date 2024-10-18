@@ -12,7 +12,7 @@ DEBIAN_FRONTEND=noninteractive pkg update -y
 
 # 安装必要的软件和 Rust 编译器
 echo "正在安装 Python、Clang、OpenSSL、Git、Rust 和 OpenSSL 开发库..."
-DEBIAN_FRONTEND=noninteractive pkg install python clang openssl git rust openssl-tool openssl-dev -y --assume-yes
+DEBIAN_FRONTEND=noninteractive pkg install python clang openssl git rust openssl-tool -y --assume-yes
 
 # 克隆包含 .whl 文件的 GitHub 仓库
 echo "正在从 GitHub 克隆 wh 仓库..."
