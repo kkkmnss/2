@@ -41,11 +41,11 @@ echo "正在克隆 GitHub 项目..."
 git clone https://github.com/kkkmnss/1.git
 cd 1
 
-# 安装项目依赖
-echo "正在安装项目依赖..."
+# 尝试安装所有依赖为二进制
+echo "正在安装项目依赖（尽可能使用二进制）..."
 pip install --only-binary :all: -r requirements.txt
 
-# 安装 PyRoxy 和 Impacket 模块
+# 安装 PyRoxy 和 Impacket 模块（这些可能需要从源码编译）
 echo "正在安装 PyRoxy 和 Impacket 模块..."
 pip install git+https://github.com/MatrixTM/PyRoxy.git
 pip install git+https://github.com/SecureAuthCorp/impacket.git
