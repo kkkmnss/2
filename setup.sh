@@ -23,29 +23,13 @@ if ! command -v python3 >/dev/null 2>&1; then
     exit 1
 fi
 
-# 创建并激活 Python 虚拟环境
-echo "正在创建并激活 Python 虚拟环境..."
-python3 -m venv venv
-source venv/bin/activate
-
-# 检查虚拟环境是否激活
-if [ "$VIRTUAL_ENV" == "" ]; then
-    echo "虚拟环境未激活。" >&2
-    exit 1
-fi
-
-# 更新 pip 并安装依赖
-echo "正在更新 pip 并安装依赖包..."
-pip install --upgrade pip
-pip install requests urllib3 charset_normalizer maturin
-
-# 克隆 GitHub 项目并安装项目依赖
+# 克隆 GitHub 项目
 echo "正在克隆 GitHub 项目..."
-git clone https://github.com/kkkmnss/1.git
-cd 1
+git clone https://github.com/kkkmnss/wh.git
+cd wh
 
-# 安装项目依赖
-echo "正在安装项目依赖..."
-pip install -r requirements.txt
+# 从您的二进制文件列表安装依赖
+echo "正在安装二进制依赖文件..."
+pip install *.whl
 
 echo "环境设置完成，现在你可以开始你的项目工作了。"
