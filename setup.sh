@@ -12,7 +12,7 @@ pkg update && pkg upgrade -y
 
 # 安装必要的软件
 echo "正在安装 Python、Clang、OpenSSL、Git、Rust..."
-pkg install python clang openssl openssl-tool git rust -y
+pkg install python clang openssl git rust -y
 
 # 安装Python的pip和开发工具
 pkg install python-pip python-dev build-essential -y
