@@ -15,7 +15,7 @@ pkg update -y
 
 # 安装必要的软件和 Rust 编译器
 echo "正在安装 Python、Clang、OpenSSL、Git 和 Rust..."
-pkg install python clang openssl git rust openssl-tool openssl-dev binutils -y
+pkg install python clang openssl git rust openssl-tool binutils -y
 
 # 检查 ar 工具是否安装
 echo "检查 ar 工具是否已安装..."
