@@ -8,19 +8,19 @@ fi
 
 # 更新软件包列表
 echo "正在更新软件包列表..."
-pkg update -y
+pkg update && pkg upgrade -y
 
-# 安装必要的软件和 Rust 编译器
-echo "正在安装 Python、Clang、OpenSSL、Git、Rust 和 OpenSSL 开发库..."
-pkg install python clang openssl git rust openssl-tool openssl-dev -y
+# 安装必要的软件
+echo "正在安装 Python、Clang、OpenSSL、Git、Rust..."
+pkg install python clang openssl openssl-tool git rust -y
+
+# 安装Python的pip和开发工具
+pkg install python-pip python-dev build-essential -y
 
 # 克隆 MHDDOS 项目
 echo "正在从 GitHub 克隆 MHDDOS 项目..."
 git clone https://github.com/kkkmnss/1.git
 cd 1
-
-# 返回到主目录
-cd ..
 
 # 克隆包含 .whl 文件的 GitHub 仓库
 echo "正在从 GitHub 克隆 wh 仓库..."
