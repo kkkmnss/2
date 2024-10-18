@@ -10,8 +10,8 @@ fi
 echo "正在更新软件包列表..."
 pkg update -y
 
-# 安装必要的软件
-echo "正在安装 Python 和其他工具..."
+# 安装必要的软件和 Rust 编译器
+echo "正在安装 Python、Clang、OpenSSL、Git 和 Rust..."
 pkg install python clang openssl git rust -y
 
 # 安装 OpenSSL 工具
@@ -38,17 +38,15 @@ fi
 echo "正在配置清华大学 PyPI 镜像源..."
 pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 
-# 更新 pip
-echo "正在更新 pip..."
+# 更新 pip 并安装依赖
+echo "正在更新 pip 并安装依赖包（通过清华镜像源）..."
 pip install --upgrade pip
 
-# 下载并安装已编译的二进制包
-echo "正在下载并安装预编译的二进制包..."
+# 安装依赖：requests、urllib3、charset_normalizer、maturin 的二进制文件
+pip install --only-binary :all: requests urllib3 charset_normalizer maturin
 
-# 下载并安装已编译的 cloudscraper, requests, urllib3, charset_normalizer 等依赖
-pip install --no-cache-dir requests==2.27.1 urllib3==1.26.5 charset_normalizer==2.0.12 cloudscraper==1.2.71
-
-# 下载并安装已编译的 PyRoxy 和 impacket
+# 安装 PyRoxy 和 impacket 模块（从源代码编译）
+echo "正在安装 PyRoxy 和 Impacket 模块..."
 pip install git+https://github.com/MatrixTM/PyRoxy.git
 pip install git+https://github.com/SecureAuthCorp/impacket.git
 
@@ -59,13 +57,11 @@ cd 1
 
 # 安装项目依赖
 echo "正在安装项目依赖..."
-pip install -r requirements.txt
+pip install --only-binary :all: -r requirements.txt
 
-# 手动激活虚拟环境
-echo "激活虚拟环境..."
+# 再次激活虚拟环境，以确保后续操作在虚拟环境中执行
+echo "重新激活虚拟环境..."
 source ../venv/bin/activate
-
-echo "环境设置完成，现在你可以开始你的项目工作了。"
 
 # 添加攻击测试用例
 echo "开始示例攻击..."
